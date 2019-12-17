@@ -1,0 +1,215 @@
+diff --git a/BiLSTM_ATT_LM.py b/BiLSTM_ATT_LM.py
+index 575981e..a40d53b 100644
+--- a/BiLSTM_ATT_LM.py
++++ b/BiLSTM_ATT_LM.py
+@@ -29,11 +29,10 @@ class BiLSTM_ATT_LM(nn.Module):
+         self.dropout = nn.Dropout(p=dropout_rate)
+ 
+     def attention_network(self, encoder_out, final_hidden):
+-        encoder_out = encoder_out.squeeze(0).unsqueeze(2)
++        M = torch.tanh(encoder_out)
+         hidden = final_hidden.squeeze(0).unsqueeze(1)
+ 
+-        M = torch.tanh(encoder_out)
+-        attn_weights = torch.bmm(encoder_out, hidden).squeeze(0)
++        attn_weights = torch.bmm(hidden, encoder_out).squeeze(0)
+         soft_attn_weights = F.softmax(attn_weights, 1)
+         new_hidden = torch.bmm(encoder_out.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
+         # print (wt.shape, new_hidden.shape)
+diff --git a/wandb/debug.log b/wandb/debug.log
+index 9875381..a0adbb6 100644
+--- a/wandb/debug.log
++++ b/wandb/debug.log
+@@ -1,129 +1,17 @@
+-2019-10-23 00:57:46,847 DEBUG   MainThread:25741 [wandb_config.py:_load_defaults():87] no defaults not found in config-defaults.yaml
+-2019-10-23 00:57:46,861 DEBUG   MainThread:25741 [cmd.py:execute():724] Popen(['git', 'cat-file', '--batch-check'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=<valid stream>)
+-2019-10-23 00:57:46,873 DEBUG   MainThread:25741 [cmd.py:execute():724] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+-2019-10-23 00:57:46,882 DEBUG   MainThread:25741 [cmd.py:execute():724] Popen(['git', 'status', '--porcelain', '--untracked-files'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+-2019-10-23 00:57:46,905 DEBUG   MainThread:25741 [run_manager.py:__init__():535] Initialized sync for nlp_course/fzftcqfa
+-2019-10-23 00:57:46,912 INFO    MainThread:25741 [run_manager.py:wrap_existing_process():1115] wrapping existing process 25734
+-2019-10-23 00:57:46,954 DEBUG   MainThread:25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): pypi.org:443
+-2019-10-23 00:57:46,980 DEBUG   MainThread:25741 [connectionpool.py:_make_request():437] https://pypi.org:443 "GET /pypi/wandb/json HTTP/1.1" 200 34992
+-2019-10-23 00:57:46,991 INFO    MainThread:25741 [run_manager.py:init_run():912] system metrics and metadata threads started
+-2019-10-23 00:57:46,991 INFO    MainThread:25741 [run_manager.py:init_run():946] upserting run before process can begin, waiting at most 10 seconds
+-2019-10-23 00:57:47,028 DEBUG   Thread-19 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:57:47,129 DEBUG   Thread-19 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 511
+-2019-10-23 00:57:47,148 INFO    Thread-19 :25741 [run_manager.py:_upsert_run():1019] saving patches
+-2019-10-23 00:57:47,149 DEBUG   Thread-19 :25741 [cmd.py:execute():724] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+-2019-10-23 00:57:47,161 DEBUG   Thread-19 :25741 [cmd.py:execute():724] Popen(['git', 'diff', '--cached', '--abbrev=40', '--full-index', '--raw'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+-2019-10-23 00:57:47,172 DEBUG   Thread-19 :25741 [cmd.py:execute():724] Popen(['git', 'diff', '--abbrev=40', '--full-index', '--raw'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+-2019-10-23 00:57:47,186 DEBUG   Thread-19 :25741 [cmd.py:execute():724] Popen(['git', 'version'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+-2019-10-23 00:57:47,249 DEBUG   Thread-19 :25741 [cmd.py:execute():724] Popen(['git', 'merge-base', 'HEAD', 'e0ee548d7625b5629e79d970bb2f78eb9c6de76a'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+-2019-10-23 00:57:47,261 INFO    Thread-19 :25741 [run_manager.py:_upsert_run():1023] saving pip packages
+-2019-10-23 00:57:47,262 INFO    Thread-19 :25741 [run_manager.py:_upsert_run():1025] initializing streaming files api
+-2019-10-23 00:57:47,264 INFO    Thread-19 :25741 [run_manager.py:_upsert_run():1032] unblocking file change observer, beginning sync with W&B servers
+-2019-10-23 00:57:47,265 INFO    MainThread:25741 [run_manager.py:wrap_existing_process():1132] informing user process we are ready to proceed
+-2019-10-23 00:57:47,277 INFO    MainThread:25741 [run_manager.py:_sync_etc():1239] entering loop for messages from user process
+-2019-10-23 00:57:47,283 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:57:47,367 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:57:47,877 INFO    Thread-8  :25741 [run_manager.py:_on_file_created():671] file/dir created: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:57:47,879 INFO    Thread-8  :25741 [run_manager.py:_on_file_created():671] file/dir created: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/output.log
+-2019-10-23 00:57:47,880 INFO    Thread-8  :25741 [run_manager.py:_on_file_created():671] file/dir created: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/diff.patch
+-2019-10-23 00:57:47,881 INFO    Thread-8  :25741 [run_manager.py:_on_file_created():671] file/dir created: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/requirements.txt
+-2019-10-23 00:57:49,321 DEBUG   Thread-12 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:57:49,423 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:57:49,881 DEBUG   Thread-21 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:57:49,965 DEBUG   Thread-21 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 767
+-2019-10-23 00:57:49,994 DEBUG   Thread-21 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+-2019-10-23 00:57:49,999 DEBUG   Thread-22 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:57:50,088 DEBUG   Thread-23 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:57:50,091 DEBUG   Thread-22 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 747
+-2019-10-23 00:57:50,104 DEBUG   Thread-22 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+-2019-10-23 00:57:50,177 DEBUG   Thread-23 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 769
+-2019-10-23 00:57:50,190 DEBUG   Thread-23 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+-2019-10-23 00:57:50,234 DEBUG   Thread-21 :25741 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/automl/nlp_course/fzftcqfa/wandb-metadata.json?Expires=1571817529&GoogleAccessId=gorilla-cloud-storage%40wandb-production.iam.gserviceaccount.com&Signature=XdXxxPMg%2BzrrX%2BGVWnTuDadgwNhddTvKgKRyHkeHcH%2FUWkpWcHjvmQNQb3xgYqqrT%2F1KNZ1k64PAaBlcpUHgs1PwGzcGPyYnEVgk0DNardzCXn7Jv7UZmrUFzPKQYAuLnm0SgBoirgISCCKby8Wz2QzANsN6BQTY0wiyh6MMB9CjwrkN2Vbtdy6KQenKcTGLcgXxQPrvbJ8EWGdq%2B0nD4ebbfZ8UT%2Flo0njyRBB25n1FOdZDa%2BQlzjJP4MzNtMaev0fx35%2FnNl9lIOhjkRTH6OrOepRe%2BDID29jTDMtZ3uM%2Fhv0u%2FUSyk1ILV5%2FsuQsbGipdYB2wmjiDNePzbugd7Q%3D%3D HTTP/1.1" 200 0
+-2019-10-23 00:57:50,371 DEBUG   Thread-22 :25741 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/automl/nlp_course/fzftcqfa/diff.patch?Expires=1571817530&GoogleAccessId=gorilla-cloud-storage%40wandb-production.iam.gserviceaccount.com&Signature=i0qOL05JkLpRULq9X5ar5laQrfZnwfKRDqi0tvAr5E06vDfzJ9RGZMPnV%2FffhDBh1Fxw5%2Bol9f8jYtvRq%2B1UVa3MsbqPX8W5ltEXaK8dwKzAW%2FJtdml%2B4OL5zYDpoJ0NuMKqXOEc5UYKbKUuxbua3tPCNyqKYpv9idw6QFAJ1neS8L9MxcKmUDed8KoiuQSlh9wWCdK1950TTHsRRZe1vaf0T8qpnlxyzqu8jrt%2F43TTM6I%2Bg5e%2BxL6T4apfnB5r%2BwxgAVeZUVWNTxozw9J3n6b2sxHNKrZGjjhzDxF4xFOuL%2FQn3WKCk2SqHOYZhS3PW2ylXBjbGsapLoj0%2FtIezQ%3D%3D HTTP/1.1" 200 0
+-2019-10-23 00:57:50,531 DEBUG   Thread-23 :25741 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/automl/nlp_course/fzftcqfa/requirements.txt?Expires=1571817530&GoogleAccessId=gorilla-cloud-storage%40wandb-production.iam.gserviceaccount.com&Signature=ooBeW1yhG%2FEFWQDL0ys%2FX3F8Kf9Zs%2FBFOcXSWpsZ%2BCw%2BR9RmkckBJrYGd8o8ODAocG0wqTPvZy%2BxNkeHwAfk6IeFbRnjeDnSnvdcM0Z%2FhIdr%2BzlyGekLtd6kBkKQKl44azgEaWlCWz417l37MXbiPprJcx6QZ2eWzg3ks3atvxGzRNtiSS4YJh3ja%2FSrKwTmWk53k%2FtQvvL%2FEiyxNFiQlfKOY2p6srGMtXKBiGCbsI26hPJltRaJo2d76j%2BYQzTeoT0UxHy9WRsrWcL3FsgJ1jcDDnA10spX4g%2BL8eXHNDH7%2FiX%2FZJGLUMfkcw8Hsh%2B5UQVKNEb3YdnIBGQtGoO1LA%3D%3D HTTP/1.1" 200 0
+-2019-10-23 00:57:50,883 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/output.log
+-2019-10-23 00:57:51,471 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:57:51,887 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/output.log
+-2019-10-23 00:57:53,561 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:58:02,394 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:58:02,487 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:58:03,932 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:58:15,984 INFO    Thread-8  :25741 [run_manager.py:_on_file_created():671] file/dir created: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 00:58:16,082 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:58:17,520 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:58:17,602 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:58:20,008 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:58:32,632 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:58:32,718 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:58:36,079 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:58:46,212 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:58:47,123 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 00:58:47,172 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:58:47,747 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:58:47,840 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:58:52,144 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:59:02,868 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:59:02,954 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:59:08,219 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:59:17,262 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:59:17,983 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:59:18,073 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:59:18,248 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:59:18,257 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 00:59:23,286 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:59:33,102 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:59:33,188 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:59:39,364 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 00:59:48,216 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 00:59:48,306 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 00:59:48,329 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:59:48,407 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 00:59:49,338 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 00:59:55,443 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:00:03,337 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:00:03,429 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:00:11,523 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:00:18,455 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:00:18,529 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:00:19,438 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:00:19,559 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 01:00:27,595 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:00:33,559 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:00:33,640 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:00:43,672 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:00:48,667 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:00:48,757 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:00:49,523 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:00:50,522 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:00:50,706 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 01:00:59,747 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:01:03,785 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:01:03,876 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:01:15,818 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:01:18,897 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:01:18,975 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:01:20,614 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:01:21,632 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:01:21,838 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 01:01:31,883 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:01:33,999 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:01:34,091 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:01:47,960 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:01:49,116 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:01:49,198 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:01:51,721 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:01:51,976 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 01:01:52,690 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:02:04,030 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:02:04,225 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:02:04,316 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:02:19,342 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:02:19,428 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:02:20,110 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:02:22,783 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:02:23,120 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+-2019-10-23 01:02:23,785 DEBUG   Thread-12 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/automl/nlp_course/fzftcqfa/file_stream HTTP/1.1" 200 310
+-2019-10-23 01:02:34,453 DEBUG   Thread-20 :25741 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+-2019-10-23 01:02:34,533 DEBUG   Thread-20 :25741 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 46
+-2019-10-23 01:02:36,173 INFO    Thread-8  :25741 [run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+-2019-10-23 01:02:36,173 INFO    Thread-8  :25741 [fzftcqfa:run_manager.py:_on_file_modified():682] file/dir modified: /Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
++2019-10-23 01:07:22,826 DEBUG   MainThread:26006 [wandb_config.py:_load_defaults():87] no defaults not found in config-defaults.yaml
++2019-10-23 01:07:22,842 DEBUG   MainThread:26006 [cmd.py:execute():724] Popen(['git', 'cat-file', '--batch-check'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=<valid stream>)
++2019-10-23 01:07:22,854 DEBUG   MainThread:26006 [cmd.py:execute():724] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
++2019-10-23 01:07:22,865 DEBUG   MainThread:26006 [cmd.py:execute():724] Popen(['git', 'status', '--porcelain', '--untracked-files'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
++2019-10-23 01:07:22,889 DEBUG   MainThread:26006 [run_manager.py:__init__():535] Initialized sync for nlp_course/mw49z9si
++2019-10-23 01:07:22,896 INFO    MainThread:26006 [run_manager.py:wrap_existing_process():1115] wrapping existing process 25999
++2019-10-23 01:07:22,945 DEBUG   MainThread:26006 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): pypi.org:443
++2019-10-23 01:07:22,970 DEBUG   MainThread:26006 [connectionpool.py:_make_request():437] https://pypi.org:443 "GET /pypi/wandb/json HTTP/1.1" 200 34992
++2019-10-23 01:07:22,980 INFO    MainThread:26006 [run_manager.py:init_run():912] system metrics and metadata threads started
++2019-10-23 01:07:22,981 INFO    MainThread:26006 [run_manager.py:init_run():946] upserting run before process can begin, waiting at most 10 seconds
++2019-10-23 01:07:23,017 DEBUG   Thread-19 :26006 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
++2019-10-23 01:07:23,137 DEBUG   Thread-19 :26006 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 515
++2019-10-23 01:07:23,157 INFO    Thread-19 :26006 [run_manager.py:_upsert_run():1019] saving patches
++2019-10-23 01:07:23,158 DEBUG   Thread-19 :26006 [cmd.py:execute():724] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
++2019-10-23 01:07:23,170 DEBUG   Thread-19 :26006 [cmd.py:execute():724] Popen(['git', 'diff', '--cached', '--abbrev=40', '--full-index', '--raw'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
++2019-10-23 01:07:23,181 DEBUG   Thread-19 :26006 [cmd.py:execute():724] Popen(['git', 'diff', '--abbrev=40', '--full-index', '--raw'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
++2019-10-23 01:07:23,208 DEBUG   Thread-19 :26006 [cmd.py:execute():724] Popen(['git', 'version'], cwd=/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course, universal_newlines=False, shell=None, istream=None)
+diff --git a/wandb/run-20191023_075745-fzftcqfa/output.log b/wandb/run-20191023_075745-fzftcqfa/output.log
+index e4f667d..faf8f50 100644
+--- a/wandb/run-20191023_075745-fzftcqfa/output.log
++++ b/wandb/run-20191023_075745-fzftcqfa/output.log
+@@ -8,4 +8,4 @@
+   "num_layers={}".format(dropout, num_layers))
+ 2019-10-23 00:57:51.425 INFO:	Moving model to cpu
+ 2019-10-23 00:57:51.428 INFO:	Device for training cpu
+-0it [00:00, ?it/s]
+\ No newline at end of file
++0it [00:00, ?it/s]                  Traceback (most recent call last):
+diff --git a/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl b/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+index e524e91..51401ea 100644
+--- a/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
++++ b/wandb/run-20191023_075745-fzftcqfa/wandb-events.jsonl
+@@ -7,3 +7,13 @@
+ {"system.cpu": 7.11, "system.memory": 69.25, "system.disk": 90.4, "system.proc.memory.availableMB": 5036.41, "system.proc.memory.rssMB": 179.93, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 1274880, "system.network.recv": 2740224, "_wandb": true, "_timestamp": 1571817681, "_runtime": 214}
+ {"system.cpu": 7.96, "system.memory": 69.17, "system.disk": 90.4, "system.proc.memory.availableMB": 5052.45, "system.proc.memory.rssMB": 179.93, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 1346560, "system.network.recv": 2787328, "_wandb": true, "_timestamp": 1571817711, "_runtime": 245}
+ {"system.cpu": 7.55, "system.memory": 69.01, "system.disk": 90.4, "system.proc.memory.availableMB": 5077.51, "system.proc.memory.rssMB": 179.93, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 1437696, "system.network.recv": 2862080, "_wandb": true, "_timestamp": 1571817742, "_runtime": 276}
++{"system.cpu": 16.04, "system.memory": 70.27, "system.disk": 90.4, "system.proc.memory.availableMB": 4869.88, "system.proc.memory.rssMB": 179.93, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 1629184, "system.network.recv": 2938880, "_wandb": true, "_timestamp": 1571817773, "_runtime": 307}
++{"system.cpu": 7.84, "system.memory": 70.99, "system.disk": 90.4, "system.proc.memory.availableMB": 4752.69, "system.proc.memory.rssMB": 179.93, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 1783808, "system.network.recv": 3042304, "_wandb": true, "_timestamp": 1571817804, "_runtime": 338}
++{"system.cpu": 6.92, "system.memory": 71.01, "system.disk": 90.4, "system.proc.memory.availableMB": 4750.14, "system.proc.memory.rssMB": 179.93, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 1901568, "system.network.recv": 3159040, "_wandb": true, "_timestamp": 1571817835, "_runtime": 369}
++{"system.cpu": 9.46, "system.memory": 70.99, "system.disk": 90.4, "system.proc.memory.availableMB": 4752.11, "system.proc.memory.rssMB": 179.94, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 2028544, "system.network.recv": 3281920, "_wandb": true, "_timestamp": 1571817866, "_runtime": 399}
++{"system.cpu": 6.11, "system.memory": 70.78, "system.disk": 90.4, "system.proc.memory.availableMB": 4784.71, "system.proc.memory.rssMB": 180.0, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 2110464, "system.network.recv": 3347456, "_wandb": true, "_timestamp": 1571817897, "_runtime": 430}
++{"system.cpu": 7.59, "system.memory": 70.75, "system.disk": 90.4, "system.proc.memory.availableMB": 4793.03, "system.proc.memory.rssMB": 180.0, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 2207744, "system.network.recv": 3424256, "_wandb": true, "_timestamp": 1571817928, "_runtime": 461}
++{"system.cpu": 14.37, "system.memory": 71.12, "system.disk": 90.4, "system.proc.memory.availableMB": 4731.99, "system.proc.memory.rssMB": 180.0, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 2278400, "system.network.recv": 3504128, "_wandb": true, "_timestamp": 1571817959, "_runtime": 492}
++{"system.cpu": 13.17, "system.memory": 71.01, "system.disk": 90.4, "system.proc.memory.availableMB": 4749.82, "system.proc.memory.rssMB": 180.0, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 2364416, "system.network.recv": 3559424, "_wandb": true, "_timestamp": 1571817990, "_runtime": 523}
++{"system.cpu": 9.96, "system.memory": 71.2, "system.disk": 90.4, "system.proc.memory.availableMB": 4717.06, "system.proc.memory.rssMB": 180.0, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 9.0, "system.network.sent": 2460672, "system.network.recv": 3634176, "_wandb": true, "_timestamp": 1571818021, "_runtime": 554}
++{"system.cpu": 15.71, "system.memory": 71.26, "system.disk": 90.4, "system.proc.memory.availableMB": 4710.47, "system.proc.memory.rssMB": 180.08, "system.proc.memory.percent": 1.1, "system.proc.cpu.threads": 8.89, "system.network.sent": 2513920, "system.network.recv": 3672064, "_wandb": true, "_timestamp": 1571818038, "_runtime": 572}
+diff --git a/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json b/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+index 0fc434f..4e245ae 100644
+--- a/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
++++ b/wandb/run-20191023_075745-fzftcqfa/wandb-metadata.json
+@@ -14,9 +14,10 @@
+     "python": "3.7.4",
+     "cpu_count": 8,
+     "args": [],
+-    "state": "running",
++    "state": "killed",
+     "jobType": null,
+     "mode": "run",
+     "project": "nlp_course",
+-    "heartbeatAt": "2019-10-23T08:02:35.802534"
++    "heartbeatAt": "2019-10-23T08:07:18.659654",
++    "exitcode": 255
+ }

@@ -1,0 +1,30 @@
+stdbuf was not found; communication with perl may hang due to stdio buffering.
+stdbuf was not found; communication with perl may hang due to stdio buffering.
+model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
+2019-10-22 23:35:21.960 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
+2019-10-22 23:35:23.379 INFO:	killing process 23027
+2019-10-22 23:35:23.380 INFO:	killing process 23029
+Exception ignored in: <function ToolWrapper.__del__ at 0x10f0218c0>
+Traceback (most recent call last):
+  File "/anaconda3/envs/nlp_course/lib/python3.7/site-packages/toolwrapper.py", line 58, in __del__
+  File "/anaconda3/envs/nlp_course/lib/python3.7/site-packages/toolwrapper.py", line 123, in close
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1378, in info
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1514, in _log
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1524, in handle
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1586, in callHandlers
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 894, in handle
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1126, in emit
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1116, in _open
+NameError: name 'open' is not defined
+Exception ignored in: <function ToolWrapper.__del__ at 0x10f0218c0>
+Traceback (most recent call last):
+  File "/anaconda3/envs/nlp_course/lib/python3.7/site-packages/toolwrapper.py", line 58, in __del__
+  File "/anaconda3/envs/nlp_course/lib/python3.7/site-packages/toolwrapper.py", line 123, in close
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1378, in info
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1514, in _log
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1524, in handle
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1586, in callHandlers
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 894, in handle
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1126, in emit
+  File "/anaconda3/envs/nlp_course/lib/python3.7/logging/__init__.py", line 1116, in _open
+NameError: name 'open' is not defined

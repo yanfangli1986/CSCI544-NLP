@@ -1,0 +1,5 @@
+2019-10-23 01:20:00.694 INFO:	loading vocab from tmp/vocab.txt
+2019-10-23 01:20:00.699 INFO:	Vocab has 10002 types
+2019-10-23 01:20:00.699 INFO:	loading data from tmp/train.txt
+2019-10-23 01:20:02.106 INFO:	Found 144526 records in tmp/train.txt
+2019-10-23 01:20:02.176 INFO:	loading data from tmp/dev.txt

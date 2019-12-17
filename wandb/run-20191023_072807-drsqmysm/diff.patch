@@ -1,0 +1,64 @@
+diff --git a/BiLSTM_ATT_LM.py b/BiLSTM_ATT_LM.py
+index 1f46df3..f46d204 100644
+--- a/BiLSTM_ATT_LM.py
++++ b/BiLSTM_ATT_LM.py
+@@ -30,7 +30,7 @@ class BiLSTM_ATT_LM(nn.Module):
+ 
+     def attention_network(self, encoder_out, final_hidden):
+         hidden = final_hidden.squeeze(0)
+-        # M = torch.tanh(encoder_out)
++        # encoder_out = torch.tanh(encoder_out)
+         attn_weights = torch.bmm(encoder_out, hidden.unsqueeze(2)).squeeze(2)
+         soft_attn_weights = F.softmax(attn_weights, 1)
+         new_hidden = torch.bmm(encoder_out.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
+diff --git a/EXP/log.txt b/EXP/log.txt
+index 8d38408..23ffcd4 100644
+--- a/EXP/log.txt
++++ b/EXP/log.txt
+@@ -1378,3 +1378,43 @@
+ 2019-10-23 00:00:59,188.188 INFO:	Loss:2.3863
+ 2019-10-23 00:01:12,089.089 INFO:	Loss:2.4001
+ 2019-10-23 00:01:29,154.154 INFO:	Loss:2.1706
++2019-10-23 00:25:29,694.694 INFO:	loading vocab from tmp/vocab.txt
++2019-10-23 00:25:29,699.699 INFO:	Vocab has 10002 types
++2019-10-23 00:25:29,699.699 INFO:	loading data from tmp/train.txt
++2019-10-23 00:25:31,061.061 INFO:	Found 144526 records in tmp/train.txt
++2019-10-23 00:25:31,128.128 INFO:	loading data from tmp/dev.txt
++2019-10-23 00:25:31,477.477 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-23 00:25:31,523.523 INFO:	Moving model to cpu
++2019-10-23 00:25:31,526.526 INFO:	Device for training cpu
++2019-10-23 00:26:09,615.615 INFO:	loading vocab from tmp/vocab.txt
++2019-10-23 00:26:09,619.619 INFO:	Vocab has 10002 types
++2019-10-23 00:26:09,619.619 INFO:	loading data from tmp/train.txt
++2019-10-23 00:26:11,060.060 INFO:	Found 144526 records in tmp/train.txt
++2019-10-23 00:26:11,127.127 INFO:	loading data from tmp/dev.txt
++2019-10-23 00:26:11,489.489 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-23 00:26:11,519.519 INFO:	Moving model to cpu
++2019-10-23 00:26:11,519.519 INFO:	Device for training cpu
++2019-10-23 00:26:35,769.769 INFO:	loading vocab from tmp/vocab.txt
++2019-10-23 00:26:35,773.773 INFO:	Vocab has 10002 types
++2019-10-23 00:26:35,773.773 INFO:	loading data from tmp/train.txt
++2019-10-23 00:26:37,177.177 INFO:	Found 144526 records in tmp/train.txt
++2019-10-23 00:26:37,247.247 INFO:	loading data from tmp/dev.txt
++2019-10-23 00:26:37,599.599 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-23 00:26:37,630.630 INFO:	Moving model to cpu
++2019-10-23 00:26:37,631.631 INFO:	Device for training cpu
++2019-10-23 00:27:12,616.616 INFO:	loading vocab from tmp/vocab.txt
++2019-10-23 00:27:12,623.623 INFO:	Vocab has 10002 types
++2019-10-23 00:27:12,624.624 INFO:	loading data from tmp/train.txt
++2019-10-23 00:27:16,077.077 INFO:	Found 144526 records in tmp/train.txt
++2019-10-23 00:27:16,137.137 INFO:	loading data from tmp/dev.txt
++2019-10-23 00:27:16,913.913 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-23 00:27:16,943.943 INFO:	Moving model to cpu
++2019-10-23 00:27:16,946.946 INFO:	Device for training cpu
++2019-10-23 00:28:02,879.879 INFO:	loading vocab from tmp/vocab.txt
++2019-10-23 00:28:02,885.885 INFO:	Vocab has 10002 types
++2019-10-23 00:28:02,886.886 INFO:	loading data from tmp/train.txt
++2019-10-23 00:28:04,461.461 INFO:	Found 144526 records in tmp/train.txt
++2019-10-23 00:28:04,556.556 INFO:	loading data from tmp/dev.txt
++2019-10-23 00:28:04,938.938 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-23 00:28:04,968.968 INFO:	Moving model to cpu
++2019-10-23 00:28:04,969.969 INFO:	Device for training cpu
+diff --git a/wandb/debug.log b/wandb/debug.log
+index 917b52d..3bddc5f 100644
+Binary files a/wandb/debug.log and b/wandb/debug.log differ

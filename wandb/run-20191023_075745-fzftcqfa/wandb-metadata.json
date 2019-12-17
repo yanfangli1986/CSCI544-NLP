@@ -1,0 +1,23 @@
+{
+    "root": "/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course",
+    "program": "/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/train.py",
+    "git": {
+        "remote": "https://github.com/chaoyanghe/544_nlp_course.git",
+        "commit": "e0ee548d7625b5629e79d970bb2f78eb9c6de76a"
+    },
+    "email": "me@chaoyanghe.com",
+    "startedAt": "2019-10-23T07:57:46.155954",
+    "host": "chaoyanghe-hostname",
+    "username": "chaoyanghe",
+    "executable": "/anaconda3/envs/nlp_course/bin/python",
+    "os": "Darwin-17.7.0-x86_64-i386-64bit",
+    "python": "3.7.4",
+    "cpu_count": 8,
+    "args": [],
+    "state": "killed",
+    "jobType": null,
+    "mode": "run",
+    "project": "nlp_course",
+    "heartbeatAt": "2019-10-23T08:07:18.659654",
+    "exitcode": 255
+}

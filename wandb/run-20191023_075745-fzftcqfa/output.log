@@ -1,0 +1,11 @@
+2019-10-23 00:57:47.301 INFO:	loading vocab from tmp/vocab.txt
+2019-10-23 00:57:47.307 INFO:	Vocab has 10002 types
+2019-10-23 00:57:47.308 INFO:	loading data from tmp/train.txt
+2019-10-23 00:57:50.555 INFO:	Found 144526 records in tmp/train.txt
+2019-10-23 00:57:50.616 INFO:	loading data from tmp/dev.txt
+2019-10-23 00:57:51.392 INFO:	Found 36131 records in tmp/dev.txt
+/anaconda3/envs/nlp_course/lib/python3.7/site-packages/torch/nn/modules/rnn.py:51: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.4 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+2019-10-23 00:57:51.425 INFO:	Moving model to cpu
+2019-10-23 00:57:51.428 INFO:	Device for training cpu
+0it [00:00, ?it/s]                  Traceback (most recent call last):

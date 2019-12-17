@@ -1,0 +1,708 @@
+diff --git a/BiLSTM_ATT_LM.py b/BiLSTM_ATT_LM.py
+index be6b838..1f46df3 100644
+--- a/BiLSTM_ATT_LM.py
++++ b/BiLSTM_ATT_LM.py
+@@ -8,7 +8,7 @@ from vocab import PAD_IDX
+ # https://www.aclweb.org/anthology/P16-2034/
+ 
+ class BiLSTM_ATT_LM(nn.Module):
+-    def __init__(self, vocab_size, n_class, emb_dim=50, hid=100, num_layers=1, dropout_rate = 0,
++    def __init__(self, vocab_size, n_class, emb_dim=50, hid=100, num_layers=1, dropout_rate=0,
+                  use_bidirectional=True):
+         super(BiLSTM_ATT_LM, self).__init__()
+         self.embedding = nn.Embedding(num_embeddings=vocab_size,
+diff --git a/EXP/log.txt b/EXP/log.txt
+index 8a19dc6..ba06596 100644
+--- a/EXP/log.txt
++++ b/EXP/log.txt
+@@ -768,3 +768,536 @@
+ 2019-10-22 22:41:39,094.094 INFO:	Found 36131 records in tmp/dev.txt
+ 2019-10-22 22:41:39,118.118 INFO:	Moving model to cpu
+ 2019-10-22 22:41:39,118.118 INFO:	Device for training cpu
++2019-10-22 23:05:31,173.173 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:05:31,182.182 INFO:	Vocab has 10002 types
++2019-10-22 23:05:31,183.183 INFO:	loading data from tmp/train.txt
++2019-10-22 23:05:32,741.741 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:05:32,815.815 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:05:33,124.124 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:05:33,163.163 INFO:	Moving model to cpu
++2019-10-22 23:05:33,166.166 INFO:	Device for training cpu
++2019-10-22 23:05:40,206.206 INFO:	Loss:9.1123
++2019-10-22 23:05:44,596.596 INFO:	Loss:9.0280
++2019-10-22 23:05:49,371.371 INFO:	Loss:8.9664
++2019-10-22 23:05:54,706.706 INFO:	Loss:8.9085
++2019-10-22 23:08:56,966.966 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:08:56,971.971 INFO:	Vocab has 10002 types
++2019-10-22 23:08:56,971.971 INFO:	loading data from tmp/train.txt
++2019-10-22 23:08:58,436.436 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:08:58,519.519 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:08:58,805.805 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:08:58,834.834 INFO:	Moving model to cpu
++2019-10-22 23:08:58,835.835 INFO:	Device for training cpu
++2019-10-22 23:09:17,289.289 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:09:17,293.293 INFO:	Vocab has 10002 types
++2019-10-22 23:09:17,293.293 INFO:	loading data from tmp/train.txt
++2019-10-22 23:09:18,777.777 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:09:18,854.854 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:09:19,141.141 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:09:19,170.170 INFO:	Moving model to cpu
++2019-10-22 23:09:19,171.171 INFO:	Device for training cpu
++2019-10-22 23:09:46,463.463 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:09:46,470.470 INFO:	Vocab has 10002 types
++2019-10-22 23:09:46,470.470 INFO:	loading data from tmp/train.txt
++2019-10-22 23:09:47,958.958 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:09:48,032.032 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:09:48,323.323 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:09:48,356.356 INFO:	Moving model to cpu
++2019-10-22 23:09:48,357.357 INFO:	Device for training cpu
++2019-10-22 23:09:56,280.280 INFO:	Loss:9.1411
++2019-10-22 23:10:01,483.483 INFO:	Loss:9.0655
++2019-10-22 23:10:06,951.951 INFO:	Loss:9.0153
++2019-10-22 23:10:15,119.119 INFO:	Loss:8.9690
++2019-10-22 23:10:31,641.641 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:10:31,646.646 INFO:	Vocab has 10002 types
++2019-10-22 23:10:31,647.647 INFO:	loading data from tmp/train.txt
++2019-10-22 23:10:33,665.665 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:10:33,736.736 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:10:34,117.117 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:10:34,148.148 INFO:	Moving model to cpu
++2019-10-22 23:10:34,148.148 INFO:	Device for training cpu
++2019-10-22 23:11:15,842.842 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:11:15,846.846 INFO:	Vocab has 10002 types
++2019-10-22 23:11:15,846.846 INFO:	loading data from tmp/train.txt
++2019-10-22 23:11:17,315.315 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:11:17,385.385 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:11:17,679.679 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:11:17,705.705 INFO:	Moving model to cpu
++2019-10-22 23:11:17,706.706 INFO:	Device for training cpu
++2019-10-22 23:11:34,150.150 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:11:34,155.155 INFO:	Vocab has 10002 types
++2019-10-22 23:11:34,155.155 INFO:	loading data from tmp/train.txt
++2019-10-22 23:11:35,717.717 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:11:35,793.793 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:11:36,096.096 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:11:36,127.127 INFO:	Moving model to cpu
++2019-10-22 23:11:36,127.127 INFO:	Device for training cpu
++2019-10-22 23:11:44,273.273 INFO:	Loss:9.1814
++2019-10-22 23:11:49,079.079 INFO:	Loss:9.0927
++2019-10-22 23:11:54,050.050 INFO:	Loss:9.0365
++2019-10-22 23:11:59,581.581 INFO:	Loss:9.0010
++2019-10-22 23:12:33,335.335 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:12:33,340.340 INFO:	Vocab has 10002 types
++2019-10-22 23:12:33,340.340 INFO:	loading data from tmp/train.txt
++2019-10-22 23:12:34,739.739 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:12:34,808.808 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:12:35,093.093 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:12:35,123.123 INFO:	Moving model to cpu
++2019-10-22 23:12:35,123.123 INFO:	Device for training cpu
++2019-10-22 23:13:12,250.250 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:13:12,254.254 INFO:	Vocab has 10002 types
++2019-10-22 23:13:12,255.255 INFO:	loading data from tmp/train.txt
++2019-10-22 23:13:13,705.705 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:13:13,774.774 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:13:14,073.073 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:13:14,102.102 INFO:	Moving model to cpu
++2019-10-22 23:13:14,102.102 INFO:	Device for training cpu
++2019-10-22 23:13:31,573.573 INFO:	Loss:9.0342
++2019-10-22 23:13:41,149.149 INFO:	Loss:8.9936
++2019-10-22 23:13:50,785.785 INFO:	Loss:8.9734
++2019-10-22 23:14:02,178.178 INFO:	Loss:8.9613
++2019-10-22 23:15:28,344.344 INFO:	Loss:8.9699
++2019-10-22 23:16:17,506.506 INFO:	Loss:8.9397
++2019-10-22 23:16:25,944.944 INFO:	Loss:8.8819
++2019-10-22 23:16:34,695.695 INFO:	Loss:8.8578
++2019-10-22 23:16:41,301.301 INFO:	Loss:8.8145
++2019-10-22 23:16:53,078.078 INFO:	Loss:8.7957
++2019-10-22 23:17:02,063.063 INFO:	Loss:8.7539
++2019-10-22 23:17:11,306.306 INFO:	Loss:8.6903
++2019-10-22 23:17:22,917.917 INFO:	Loss:8.6255
++2019-10-22 23:17:32,143.143 INFO:	Loss:8.5424
++2019-10-22 23:17:43,160.160 INFO:	Loss:8.4431
++2019-10-22 23:17:56,425.425 INFO:	Loss:8.2361
++2019-10-22 23:18:07,783.783 INFO:	Loss:8.0058
++2019-10-22 23:18:25,184.184 INFO:	Loss:7.5088
++2019-10-22 23:18:47,982.982 INFO:	Loss:6.9755
++2019-10-22 23:19:01,765.765 INFO:	Loss:6.7784
++2019-10-22 23:19:12,046.046 INFO:	Loss:6.6320
++2019-10-22 23:19:22,565.565 INFO:	Loss:6.3294
++2019-10-22 23:19:31,382.382 INFO:	Loss:6.1663
++2019-10-22 23:19:44,715.715 INFO:	Loss:5.5775
++2019-10-22 23:19:58,259.259 INFO:	Loss:5.3063
++2019-10-22 23:21:17,924.924 INFO:	Loss:4.3372
++2019-10-22 23:21:26,881.881 INFO:	Loss:5.3246
++2019-10-22 23:21:43,879.879 INFO:	Loss:4.3623
++2019-10-22 23:21:56,353.353 INFO:	Loss:4.5149
++2019-10-22 23:22:17,276.276 INFO:	Loss:3.8347
++2019-10-22 23:22:29,038.038 INFO:	Loss:4.0313
++2019-10-22 23:31:35,756.756 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:37,369.369 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:37,406.406 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:37,429.429 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:37,513.513 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:37,608.608 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:37,618.618 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:37,692.692 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:37,737.737 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:37,872.872 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:37,884.884 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:37,903.903 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:37,986.986 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,031.031 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,047.047 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,151.151 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,165.165 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,171.171 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,177.177 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,194.194 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,276.276 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,394.394 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,502.502 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,524.524 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,578.578 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,578.578 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,590.590 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,597.597 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,624.624 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,635.635 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,649.649 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,655.655 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,658.658 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,658.658 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,669.669 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,676.676 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,678.678 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,694.694 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,732.732 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,734.734 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,761.761 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,828.828 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,837.837 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,841.841 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,851.851 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,854.854 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,866.866 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,866.866 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,867.867 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,877.877 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,879.879 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,905.905 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,906.906 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,910.910 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,911.911 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,918.918 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,919.919 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,922.922 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:38,925.925 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,936.936 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,946.946 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,949.949 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,951.951 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,956.956 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,967.967 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:38,969.969 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,969.969 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:38,970.970 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:38,995.995 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,995.995 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:38,997.997 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,037.037 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,044.044 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,045.045 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,046.046 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,052.052 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,053.053 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,054.054 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,054.054 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,056.056 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,068.068 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:39,090.090 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,090.090 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,096.096 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,110.110 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,114.114 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,118.118 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,134.134 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:39,144.144 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,144.144 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,175.175 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,188.188 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,200.200 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:39,216.216 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,226.226 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,240.240 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,250.250 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:39,267.267 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,301.301 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,302.302 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,302.302 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,313.313 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,316.316 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,316.316 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,434.434 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,549.549 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:39,640.640 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,666.666 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,743.743 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,756.756 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,808.808 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:39,809.809 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,811.811 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,812.812 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,817.817 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:39,854.854 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:39,867.867 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:39,948.948 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:39,999.999 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:40,009.009 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:40,014.014 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:40,130.130 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:40,180.180 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:40,191.191 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:40,229.229 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:56,259.259 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:56,655.655 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:57,031.031 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:31:57,409.409 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:57,778.778 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:58,182.182 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:31:58,583.583 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:31:59,080.080 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:31:59,469.469 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:31:59,865.865 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:32:00,269.269 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:32:00,688.688 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:32:01,080.080 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:32:01,486.486 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:32:01,881.881 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:32:02,274.274 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:32:02,660.660 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:32:03,071.071 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:32:03,467.467 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:32:03,856.856 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:32:04,244.244 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:32:04,630.630 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:32:05,014.014 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:32:05,402.402 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:32:05,797.797 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:32:06,211.211 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:32:06,591.591 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:32:06,973.973 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:32:07,401.401 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:32:07,858.858 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:32:10,062.062 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:33:19,732.732 INFO:	bbbb
++2019-10-22 23:33:19,751.751 INFO:	bbbb
++2019-10-22 23:33:19,845.845 INFO:	bbbb
++2019-10-22 23:33:20,172.172 INFO:	bbbb
++2019-10-22 23:33:20,423.423 INFO:	bbbb
++2019-10-22 23:33:20,444.444 INFO:	bbbb
++2019-10-22 23:33:20,454.454 INFO:	bbbb
++2019-10-22 23:33:20,472.472 INFO:	bbbb
++2019-10-22 23:33:20,472.472 INFO:	bbbb
++2019-10-22 23:33:20,474.474 INFO:	bbbb
++2019-10-22 23:33:20,481.481 INFO:	bbbb
++2019-10-22 23:33:20,484.484 INFO:	bbbb
++2019-10-22 23:33:20,561.561 INFO:	bbbb
++2019-10-22 23:33:20,607.607 INFO:	bbbb
++2019-10-22 23:33:20,608.608 INFO:	bbbb
++2019-10-22 23:33:20,623.623 INFO:	bbbb
++2019-10-22 23:33:20,629.629 INFO:	bbbb
++2019-10-22 23:33:20,644.644 INFO:	bbbb
++2019-10-22 23:33:20,646.646 INFO:	bbbb
++2019-10-22 23:33:20,648.648 INFO:	bbbb
++2019-10-22 23:33:20,660.660 INFO:	bbbb
++2019-10-22 23:33:20,697.697 INFO:	bbbb
++2019-10-22 23:33:20,715.715 INFO:	bbbb
++2019-10-22 23:33:20,726.726 INFO:	bbbb
++2019-10-22 23:33:20,728.728 INFO:	bbbb
++2019-10-22 23:33:20,750.750 INFO:	bbbb
++2019-10-22 23:33:20,752.752 INFO:	bbbb
++2019-10-22 23:33:20,756.756 INFO:	bbbb
++2019-10-22 23:33:20,770.770 INFO:	bbbb
++2019-10-22 23:33:20,848.848 INFO:	bbbb
++2019-10-22 23:33:20,861.861 INFO:	bbbb
++2019-10-22 23:33:20,876.876 INFO:	bbbb
++2019-10-22 23:33:20,950.950 INFO:	bbbb
++2019-10-22 23:33:20,967.967 INFO:	bbbb
++2019-10-22 23:33:20,988.988 INFO:	bbbb
++2019-10-22 23:33:21,005.005 INFO:	bbbb
++2019-10-22 23:33:21,009.009 INFO:	bbbb
++2019-10-22 23:33:21,023.023 INFO:	bbbb
++2019-10-22 23:33:21,065.065 INFO:	bbbb
++2019-10-22 23:33:21,065.065 INFO:	bbbb
++2019-10-22 23:33:21,071.071 INFO:	bbbb
++2019-10-22 23:33:21,074.074 INFO:	bbbb
++2019-10-22 23:33:21,082.082 INFO:	bbbb
++2019-10-22 23:33:21,091.091 INFO:	bbbb
++2019-10-22 23:33:21,122.122 INFO:	bbbb
++2019-10-22 23:33:21,128.128 INFO:	bbbb
++2019-10-22 23:33:21,138.138 INFO:	bbbb
++2019-10-22 23:33:21,138.138 INFO:	bbbb
++2019-10-22 23:33:21,138.138 INFO:	bbbb
++2019-10-22 23:33:21,139.139 INFO:	bbbb
++2019-10-22 23:33:21,154.154 INFO:	bbbb
++2019-10-22 23:33:21,193.193 INFO:	bbbb
++2019-10-22 23:33:21,210.210 INFO:	bbbb
++2019-10-22 23:33:21,228.228 INFO:	bbbb
++2019-10-22 23:33:21,236.236 INFO:	bbbb
++2019-10-22 23:33:21,237.237 INFO:	bbbb
++2019-10-22 23:33:21,240.240 INFO:	bbbb
++2019-10-22 23:33:21,246.246 INFO:	bbbb
++2019-10-22 23:33:21,346.346 INFO:	bbbb
++2019-10-22 23:33:21,434.434 INFO:	bbbb
++2019-10-22 23:33:21,435.435 INFO:	bbbb
++2019-10-22 23:33:21,472.472 INFO:	bbbb
++2019-10-22 23:33:21,472.472 INFO:	bbbb
++2019-10-22 23:33:21,489.489 INFO:	bbbb
++2019-10-22 23:33:21,559.559 INFO:	bbbb
++2019-10-22 23:33:21,585.585 INFO:	bbbb
++2019-10-22 23:33:21,597.597 INFO:	bbbb
++2019-10-22 23:33:21,606.606 INFO:	bbbb
++2019-10-22 23:33:21,628.628 INFO:	bbbb
++2019-10-22 23:33:21,629.629 INFO:	bbbb
++2019-10-22 23:33:21,659.659 INFO:	bbbb
++2019-10-22 23:33:21,672.672 INFO:	bbbb
++2019-10-22 23:33:21,693.693 INFO:	bbbb
++2019-10-22 23:33:21,716.716 INFO:	bbbb
++2019-10-22 23:33:21,728.728 INFO:	bbbb
++2019-10-22 23:33:21,734.734 INFO:	bbbb
++2019-10-22 23:33:21,754.754 INFO:	bbbb
++2019-10-22 23:33:21,863.863 INFO:	bbbb
++2019-10-22 23:33:21,874.874 INFO:	bbbb
++2019-10-22 23:33:21,880.880 INFO:	bbbb
++2019-10-22 23:33:21,880.880 INFO:	bbbb
++2019-10-22 23:33:21,881.881 INFO:	bbbb
++2019-10-22 23:33:21,885.885 INFO:	bbbb
++2019-10-22 23:33:21,886.886 INFO:	bbbb
++2019-10-22 23:33:21,901.901 INFO:	bbbb
++2019-10-22 23:33:21,913.913 INFO:	bbbb
++2019-10-22 23:33:21,930.930 INFO:	bbbb
++2019-10-22 23:33:21,978.978 INFO:	bbbb
++2019-10-22 23:33:21,982.982 INFO:	bbbb
++2019-10-22 23:33:21,983.983 INFO:	bbbb
++2019-10-22 23:33:21,986.986 INFO:	bbbb
++2019-10-22 23:33:21,988.988 INFO:	bbbb
++2019-10-22 23:33:22,006.006 INFO:	bbbb
++2019-10-22 23:33:22,025.025 INFO:	bbbb
++2019-10-22 23:33:22,028.028 INFO:	bbbb
++2019-10-22 23:33:22,058.058 INFO:	bbbb
++2019-10-22 23:33:22,060.060 INFO:	bbbb
++2019-10-22 23:33:22,078.078 INFO:	bbbb
++2019-10-22 23:33:22,099.099 INFO:	bbbb
++2019-10-22 23:33:22,110.110 INFO:	bbbb
++2019-10-22 23:33:22,110.110 INFO:	bbbb
++2019-10-22 23:33:22,125.125 INFO:	bbbb
++2019-10-22 23:33:22,126.126 INFO:	bbbb
++2019-10-22 23:33:22,145.145 INFO:	bbbb
++2019-10-22 23:33:22,213.213 INFO:	bbbb
++2019-10-22 23:33:22,234.234 INFO:	bbbb
++2019-10-22 23:33:22,257.257 INFO:	bbbb
++2019-10-22 23:33:22,298.298 INFO:	bbbb
++2019-10-22 23:33:22,485.485 INFO:	bbbb
++2019-10-22 23:33:22,503.503 INFO:	bbbb
++2019-10-22 23:33:22,520.520 INFO:	bbbb
++2019-10-22 23:33:22,603.603 INFO:	bbbb
++2019-10-22 23:33:22,609.609 INFO:	bbbb
++2019-10-22 23:33:22,618.618 INFO:	bbbb
++2019-10-22 23:33:22,717.717 INFO:	bbbb
++2019-10-22 23:33:22,719.719 INFO:	bbbb
++2019-10-22 23:33:22,737.737 INFO:	bbbb
++2019-10-22 23:33:22,753.753 INFO:	bbbb
++2019-10-22 23:33:22,763.763 INFO:	bbbb
++2019-10-22 23:33:22,867.867 INFO:	bbbb
++2019-10-22 23:33:22,945.945 INFO:	bbbb
++2019-10-22 23:33:23,085.085 INFO:	bbbb
++2019-10-22 23:33:23,374.374 INFO:	bbbb
++2019-10-22 23:33:23,687.687 INFO:	bbbb
++2019-10-22 23:33:23,688.688 INFO:	bbbb
++2019-10-22 23:35:18,804.804 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:20,604.604 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:20,887.887 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:21,212.212 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:21,403.403 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:21,433.433 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:21,445.445 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:21,528.528 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:21,578.578 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:21,589.589 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:21,597.597 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:21,651.651 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:21,717.717 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:21,732.732 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:21,762.762 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:21,823.823 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:21,860.860 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:21,959.959 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:21,960.960 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:21,971.971 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:21,976.976 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:21,978.978 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:21,993.993 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,022.022 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:22,023.023 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:22,061.061 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,108.108 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,288.288 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,305.305 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,325.325 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:22,328.328 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,341.341 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:22,343.343 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:22,346.346 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,347.347 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,349.349 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,356.356 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,397.397 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,401.401 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,417.417 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,421.421 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,423.423 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,510.510 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,512.512 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,514.514 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,518.518 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,558.558 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,559.559 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,572.572 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,598.598 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,648.648 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,667.667 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:22,695.695 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,706.706 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,706.706 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,708.708 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,709.709 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:22,714.714 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,723.723 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,739.739 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,753.753 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,765.765 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,791.791 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,811.811 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,833.833 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,839.839 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,873.873 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,896.896 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,924.924 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,968.968 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:22,981.981 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,982.982 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:22,983.983 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:22,984.984 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:22,989.989 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,000.000 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,007.007 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,030.030 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:23,049.049 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:23,062.062 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,071.071 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,156.156 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:23,170.170 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,177.177 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,183.183 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:23,194.194 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,241.241 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,242.242 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:23,247.247 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,248.248 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,324.324 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:23,326.326 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,328.328 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,328.328 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,333.333 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:23,355.355 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,383.383 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,399.399 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,435.435 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,470.470 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,471.471 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,512.512 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,546.546 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,547.547 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:23,572.572 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:23,576.576 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,582.582 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,598.598 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,755.755 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:23,834.834 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,835.835 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,843.843 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:23,849.849 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:23,884.884 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:23,892.892 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:23,941.941 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:24,011.011 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.6
++2019-10-22 23:35:24,026.026 INFO:	model = LSTM, emb_dim = 100, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:24,059.059 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.5
++2019-10-22 23:35:24,213.213 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.7
++2019-10-22 23:35:24,251.251 INFO:	model = LSTM, emb_dim = 1000, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:24,257.257 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:24,259.259 INFO:	model = LSTM, emb_dim = 400, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:35:24,314.314 INFO:	model = LSTM, emb_dim = 200, hid_dim = 100, dropout_rate = 0.4
++2019-10-22 23:35:24,466.466 INFO:	model = LSTM, emb_dim = 600, hid_dim = 100, dropout_rate = 0.3
++2019-10-22 23:42:32,425.425 INFO:	loading vocab from tmp/vocab.txt
++2019-10-22 23:42:32,430.430 INFO:	Vocab has 10002 types
++2019-10-22 23:42:32,430.430 INFO:	loading data from tmp/train.txt
++2019-10-22 23:42:34,091.091 INFO:	Found 144526 records in tmp/train.txt
++2019-10-22 23:42:34,164.164 INFO:	loading data from tmp/dev.txt
++2019-10-22 23:42:34,559.559 INFO:	Found 36131 records in tmp/dev.txt
++2019-10-22 23:42:34,604.604 INFO:	Moving model to cpu
++2019-10-22 23:42:34,606.606 INFO:	Device for training cpu
++2019-10-22 23:43:01,853.853 INFO:	Loss:9.1492
++2019-10-22 23:43:13,564.564 INFO:	Loss:9.0879
++2019-10-22 23:43:25,225.225 INFO:	Loss:9.0691
++2019-10-22 23:43:41,340.340 INFO:	Loss:9.0605
+diff --git a/README.md b/README.md
+index d15cbdc..6009a93 100644
+--- a/README.md
++++ b/README.md
+@@ -1,2 +1,8 @@
+ # CSCI-544
+ Public Repo for CSCI-544 class
++
++
++# wandb login
++```
++wandb login ee0b5f53d949c84cee7decbe7a629e63fb2f8408
++```
+diff --git a/run_hpo.sh b/run_hpo.sh
+new file mode 100755
+index 0000000..13484ab
+--- /dev/null
++++ b/run_hpo.sh
+@@ -0,0 +1,17 @@
++#!/usr/bin/env bash
++
++declare -i idx=0
++
++for emb_dim in 50 100 200 300 500
++do
++    for hid_dim in 100 200 400 600 1000
++    do
++        for dropout_ratio in 0.3 0.4 0.5 0.6 0.7
++        do
++            let idx+=1
++            # echo "($idx) emb_dim = $emb_dim hid_dim = $hid_dim dropout_ratio = $dropout_ratio"
++            nohup sh run_lm_rnn.sh 'LSTM' $emb_dim $hid_dim $dropout_ratio > "./EXP/log_$idx.txt" &
++        done
++    done
++done
++
+diff --git a/run_lm_rnn.sh b/run_lm_rnn.sh
+new file mode 100755
+index 0000000..d26267d
+--- /dev/null
++++ b/run_lm_rnn.sh
+@@ -0,0 +1,18 @@
++#!/usr/bin/env bash
++
++# sh run_lm_rnn.sh 'RNN' 50 100 0.5
++
++# sh run_lm_rnn.sh 'LSTM' 50 100 0.5
++
++# sh run_lm_rnn.sh 'BiLSTM-ATT' 50 100 0.5
++
++MODEL=$1
++EMB_DIM=$2
++HID_DIM=$3
++DROP_OUT=$4
++
++python3 ./train.py \
++--model $MODEL \
++--emb_dim $EMB_DIM \
++--emb_dim $HID_DIM \
++--dropout_ratio $DROP_OUT
+\ No newline at end of file
+diff --git a/train.py b/train.py
+index 5e63791..b1b536e 100644
+--- a/train.py
++++ b/train.py
+@@ -7,6 +7,7 @@ import time
+ from pathlib import Path
+ 
+ import torch
++import wandb
+ from torch import optim, nn
+ from tqdm import tqdm
+ 
+@@ -17,9 +18,19 @@ from test_dataset import TextDataset, BATCH_SIZE
+ from utils import save_model_object
+ from vocab import Vocab, MAX_TYPES, MIN_FREQ
+ 
++wandb.init(project="nlp_course")
++
+ parser = argparse.ArgumentParser("nlp_rnn")
+ parser.add_argument('--run_id', type=int, default=0, help='running id')
+ parser.add_argument('--save', type=str, default='EXP', help='experiment name')
++
++parser.add_argument('--model', type=str, default="RNN", help='choose the model: RNN; LSTM; BiLSTM_ATT')
++parser.add_argument('--emb_dim', type=int, default=50, help='embedding size')
++parser.add_argument('--hid', type=int, default=100, help='hidden layer dimension')
++parser.add_argument('--num_layers', type=int, default=1, help='number of RNN layers')
++parser.add_argument('--dropout_ratio', type=float, default=0.4, help='dropout_ratio')
++parser.add_argument('--n_epochs', type=int, default=5, help='number of epoch')
++
+ args = parser.parse_args()
+ 
+ log_format = '%(asctime)s.%(msecs)03d %(levelname)s:\t%(message)s'
+@@ -65,6 +76,7 @@ def train(model, n_epochs, batch_size, train_data, valid_data, device=torch.devi
+ 
+                 pbar_msg = f'Loss:{seq_loss.item():.4f}'
+                 # data_bar.set_postfix_str(pbar_msg)
++                wandb.log({"training_loss": seq_loss})
+ 
+                 log.info(pbar_msg)
+ 
+@@ -93,6 +105,7 @@ def train(model, n_epochs, batch_size, train_data, valid_data, device=torch.devi
+         avg_val_loss = val_loss / n_val_batches
+         losses.append((epoch, avg_train_loss, avg_val_loss))
+         log.info(f"Epoch {epoch} complete; Losses: Train={avg_train_loss:G} Valid={avg_val_loss:G}")
++        wandb.log({"avg_train_loss": avg_train_loss, "avg_val_loss": avg_val_loss})
+     return losses
+ 
+ 
+@@ -123,17 +136,35 @@ def main():
+     # losses = train(model, n_epochs=5, batch_size=BATCH_SIZE, train_data=train_data,
+     #                valid_data=dev_data)
+ 
+-    # model = RNN_LM(vocab_size=len(vocab), n_class=len(vocab))
+-    # losses = train(model, n_epochs=1, batch_size=BATCH_SIZE, train_data=train_data,
+-    #                valid_data=dev_data)
++    if args.model == "RNN":
++        model = RNN_LM(vocab_size=len(vocab), n_class=len(vocab), emb_dim=args.emb_dim, hid=args.hid,
++                       dropout_rate=args.dropout_ratio, num_layers=args.num_layers)
++        losses = train(model, n_epochs=args.n_epochs, batch_size=BATCH_SIZE, train_data=train_data,
++                       valid_data=dev_data)
++        torch.save(model.state_dict(), wandb.run.dir)
+ 
+-    # model = LSTM_LM(vocab_size=len(vocab), n_class=len(vocab))
+-    # losses = train(model, n_epochs=1, batch_size=BATCH_SIZE, train_data=train_data,
+-    #                valid_data=dev_data)
++    elif args.model == "LSTM":
++        model = LSTM_LM(vocab_size=len(vocab), n_class=len(vocab), emb_dim=args.emb_dim, hid=args.hid,
++                        dropout_rate=args.dropout_ratio, num_layers=args.num_layers)
++        losses = train(model, n_epochs=args.n_epochs, batch_size=BATCH_SIZE, train_data=train_data,
++                       valid_data=dev_data)
++        torch.save(model.state_dict(), wandb.run.dir)
++
++    elif args.model == "BiLSTM-ATT":
++        model = BiLSTM_ATT_LM(vocab_size=len(vocab), n_class=len(vocab), emb_dim=args.emb_dim, hid=args.hid,
++                              dropout_rate=args.dropout_ratio, num_layers=args.num_layers)
++        losses = train(model, n_epochs=args.n_epochs, batch_size=BATCH_SIZE, train_data=train_data,
++                       valid_data=dev_data)
++        torch.save(model.state_dict(), wandb.run.dir)
++
++
++def main_test():
++    print("model = %s, emb_dim = %s, hid_dim = %s, dropout_rate = %s" %
++          (args.model, args.emb_dim, args.hid, args.dropout_ratio))
++
++    logging.info("model = %s, emb_dim = %s, hid_dim = %s, dropout_rate = %s" %
++                 (args.model, args.emb_dim, args.hid, args.dropout_ratio))
+ 
+-    model = BiLSTM_ATT_LM(vocab_size=len(vocab), n_class=len(vocab))
+-    losses = train(model, n_epochs=1, batch_size=BATCH_SIZE, train_data=train_data,
+-                   valid_data=dev_data)
+ 
+ if __name__ == "__main__":
+     main()

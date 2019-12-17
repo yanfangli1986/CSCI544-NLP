@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 1741, in <module>
+    main()
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 1735, in main
+    globals = debugger.run(setup['file'], None, None, is_module)
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 1135, in run
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/train.py", line 44, in <module>
+    def train(model, n_epochs, batch_size, train_data, valid_data, device=torch.device('gpu')):
+RuntimeError: Expected one of cpu, cuda, mkldnn, opengl, opencl, ideep, hip, msnpu device type at start of device string: gpu
+We've got an error while stopping in post-mortem: <class 'KeyboardInterrupt'>
+

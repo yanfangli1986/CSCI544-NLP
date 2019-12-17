@@ -1,0 +1,26 @@
+2019-10-23 00:39:28.073 INFO:	loading vocab from tmp/vocab.txt
+2019-10-23 00:39:28.080 INFO:	Vocab has 10002 types
+2019-10-23 00:39:28.080 INFO:	loading data from tmp/train.txt
+2019-10-23 00:39:31.782 INFO:	Found 144526 records in tmp/train.txt
+2019-10-23 00:39:31.866 INFO:	loading data from tmp/dev.txt
+2019-10-23 00:39:32.793 INFO:	Found 36131 records in tmp/dev.txt
+/anaconda3/envs/nlp_course/lib/python3.7/site-packages/torch/nn/modules/rnn.py:51: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.4 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+2019-10-23 00:39:32.826 INFO:	Moving model to cpu
+2019-10-23 00:39:32.830 INFO:	Device for training cpu
+0it [00:00, ?it/s]                  Traceback (most recent call last):
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 1741, in <module>
+    main()
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 1735, in main
+    globals = debugger.run(setup['file'], None, None, is_module)
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 1135, in run
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/train.py", line 171, in <module>
+    main()
+  File "/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/train.py", line 158, in main
+    valid_data=dev_data)
+  File "/Users/chaoyanghe/USC/CS544-NLP and its applications/CSCI-544/544_nlp_course/train.py", line 66, in train
+    log_probs = model(cur_seqs)
+  File "/anaconda3/envs/nl
