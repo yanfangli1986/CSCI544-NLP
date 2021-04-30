@@ -36,6 +36,6 @@ subprocess32==3.5.4
 toolwrapper==1.0.0
 torchvision==0.4.1a0+d94043a
 tqdm==4.36.1
-urllib3==1.25.6
+urllib3==1.25.8
 wandb==0.8.13
 watchdog==0.9.0
